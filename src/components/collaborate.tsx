@@ -37,89 +37,104 @@ const modeIcons: Record<string, React.ReactNode> = {
 
 export function Collaborate() {
   return (
-    <section id="collaborer" className="py-24 md:py-32 bg-[var(--color-bg-muted)]" aria-labelledby="collaborer-title">
+    <section id="collaborer" className="relative py-24 md:py-40 bg-[var(--color-bg-muted)]" aria-labelledby="collaborer-title">
       <div className="container">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 id="collaborer-title" className="font-display font-bold text-[clamp(2rem,5vw,3rem)] leading-tight text-[var(--color-fg)] mb-6">
+        <div className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
+          <h2 id="collaborer-title" className="font-display font-bold text-[clamp(2rem,5vw,3.5rem)] leading-tight text-[var(--color-fg)] mb-6 animate-in">
             Travailler avec nous
           </h2>
-          <p className="text-[clamp(1.125rem,2vw,1.25rem)] text-[var(--color-fg-muted)] leading-relaxed text-balance">
+          <p className="text-[clamp(1.125rem,2vw,1.375rem)] text-[var(--color-fg-muted)] leading-relaxed text-balance animate-in animate-in-delay-1">
             CARBONE n&apos;est pas une agence. On ne vend pas de prestations. Mais on collabore
             avec des gens qu&apos;on respecte, sur des problèmes qui comptent.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16 md:mb-20">
           {collaborationModes.map((mode, index) => (
-            <motion.div
+            <motion.article
               key={mode.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.08 }}
+              className="group"
             >
               <Card variant="outlined" padding="lg" className="h-full transition-all duration-300 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-lg)]">
                 <CardHeader>
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[var(--color-accent-muted)] text-[var(--color-accent)] mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[var(--color-accent-muted)] text-[var(--color-accent)] mb-4 group-hover:scale-110 transition-transform duration-300">
                     {modeIcons[mode.icon]}
                   </div>
-                  <CardTitle className="text-xl">{mode.title}</CardTitle>
+                  <CardTitle className="text-xl group-hover:text-[var(--color-accent)] transition-colors duration-300">{mode.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-base leading-relaxed mb-6">{mode.description}</CardDescription>
-                  <Button variant="outline" asChild className="w-full">
+                  <Button variant="outline" asChild className="w-full group-hover:bg-[var(--color-accent-muted)] group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-accent)] transition-all duration-300">
                     <a href={mode.href} target="_blank" rel={mode.href.startsWith("http") ? "noopener noreferrer" : undefined}>
                       {mode.cta}
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-2" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-2 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
                     </a>
                   </Button>
                 </CardContent>
               </Card>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
-        <div className="mt-16 max-w-3xl mx-auto">
-          <Card variant="elevated" padding="lg">
-            <div className="text-center">
-              <h3 className="font-display font-bold text-2xl text-[var(--color-fg)] mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <Card variant="elevated" padding="lg" className="md:p-12">
+            <div className="text-center mb-8 md:mb-12">
+              <h3 className="font-display font-bold text-2xl md:text-3xl text-[var(--color-fg)] mb-4">
                 Ce qu&apos;on ne fait pas
               </h3>
-              <ul className="space-y-3 text-left text-[var(--color-fg-muted)] leading-relaxed">
-                <li className="flex items-start gap-3">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 text-[var(--color-error)] mt-0.5" aria-hidden="true">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                  <span>De la sous-traitance déguisée — on ne fait pas le travail à votre place sans en être partie prenante</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 text-[var(--color-error)] mt-0.5" aria-hidden="true">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                  <span>Du conseil en innovation theater — pas de slides PowerPoint pour faire joli</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 text-[var(--color-error)] mt-0.5" aria-hidden="true">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                  <span>Du verrouillage vendeur — tout ce qu&apos;on produit reste ouvert et portable</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0 text-[var(--color-error)] mt-0.5" aria-hidden="true">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                  <span>De la croissance pour la croissance — on privilégie l&apos;impact et la qualité au volume</span>
-                </li>
-              </ul>
+              <div className="w-24 h-px bg-[var(--color-accent)] mx-auto" aria-hidden="true" />
             </div>
+            <ul className="grid md:grid-cols-2 gap-6 text-left max-w-4xl mx-auto">
+              <li className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[var(--color-error)]/10 text-[var(--color-error)] flex items-center justify-center">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                <span className="text-[var(--color-fg-muted)] leading-relaxed"><strong>De la sous-traitance déguisée —</strong> on ne fait pas le travail à votre place sans en être partie prenante</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[var(--color-error)]/10 text-[var(--color-error)] flex items-center justify-center">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                <span className="text-[var(--color-fg-muted)] leading-relaxed"><strong>Du conseil en innovation theater —</strong> pas de slides PowerPoint pour faire joli</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[var(--color-error)]/10 text-[var(--color-error)] flex items-center justify-center">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                <span className="text-[var(--color-fg-muted)] leading-relaxed"><strong>Du verrouillage vendeur —</strong> tout ce qu&apos;on produit reste ouvert et portable</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[var(--color-error)]/10 text-[var(--color-error)] flex items-center justify-center">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+                <span className="text-[var(--color-fg-muted)] leading-relaxed"><strong>De la croissance pour la croissance —</strong> on privilégie l&apos;impact et la qualité au volume</span>
+              </li>
+            </ul>
           </Card>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

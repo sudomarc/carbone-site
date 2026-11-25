@@ -28,7 +28,7 @@ export function Header() {
 
   if (!mounted) {
     return (
-      <header className="fixed top-0 left-0 right-0 z-50 h-[var(--header-height)] bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]">
+      <header className="fixed top-0 left-0 right-0 z-50 h-[var(--header-height)] bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]" role="banner">
         <div className="container h-full flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2" aria-label="CARBONE - Accueil">
             <LogoMark size="md" />
@@ -44,7 +44,7 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 h-[var(--header-height)] transition-all duration-200",
         scrolled
-          ? "bg-[var(--color-bg)]/95 backdrop-blur-md border-b border-[var(--color-border)] shadow-sm"
+          ? "bg-[var(--color-bg)]/95 backdrop-blur-md border-b border-[var(--color-border)] shadow-[var(--shadow-sm)]"
           : "bg-transparent"
       )}
       role="banner"
@@ -105,8 +105,8 @@ export function Header() {
       </div>
 
       {mobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden py-4 border-t border-[var(--color-border)] animate-in">
-          <nav className="flex flex-col gap-1" role="navigation" aria-label="Navigation mobile">
+        <div id="mobile-menu" className="md:hidden py-4 border-t border-[var(--color-border)] bg-[var(--color-bg)] animate-in" role="navigation" aria-label="Navigation mobile">
+          <nav className="flex flex-col gap-1">
             {navItems.map((item) => (
               <Link
                 key={item.href}

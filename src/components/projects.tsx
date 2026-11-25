@@ -47,22 +47,28 @@ const categoryIcons: Record<string, React.ReactNode> = {
   ),
 };
 
+const categoryColors: Record<string, string> = {
+  "Éducation": "var(--color-accent)",
+  "Infrastructure": "var(--color-accent-alt)",
+  "IA / LLM": "var(--color-warning)",
+};
+
 export function Projects() {
   return (
-    <section id="projets" className="py-24 md:py-32" aria-labelledby="projets-title">
+    <section id="projets" className="relative py-24 md:py-40" aria-labelledby="projets-title">
       <div className="container">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 md:mb-20">
           <div>
-            <h2 id="projets-title" className="font-display font-bold text-[clamp(2rem,5vw,3rem)] leading-tight text-[var(--color-fg)] mb-3">
+            <h2 id="projets-title" className="font-display font-bold text-[clamp(2rem,5vw,3.5rem)] leading-tight text-[var(--color-fg)] mb-3 animate-in">
               Ce qu&apos;on construit
             </h2>
-            <p className="text-[var(--color-fg-muted)] max-w-xl text-balance">
+            <p className="text-[var(--color-fg-muted)] max-w-xl text-balance animate-in animate-in-delay-1">
               Projets ouverts, maintenus, utilisés. Pas de vaporware, pas de landing pages
               pour des idées — du code qui tourne.
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <Button variant="ghost" size="sm" className="bg-[var(--color-accent-muted)] text-[var(--color-accent)]">
+          <div className="flex flex-wrap gap-2 animate-in animate-in-delay-2">
+            <Button variant="ghost" size="sm" className="bg-[var(--color-accent-muted)] text-[var(--color-accent)] border border-[var(--color-accent-border)]">
               Tous
             </Button>
             <Button variant="ghost" size="sm">Éducation</Button>
@@ -71,32 +77,42 @@ export function Projects() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {projects.map((project, index) => (
-            <motion.div
+            <motion.article
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.08 }}
             >
               <Card variant="outlined" padding="none" className="h-full flex flex-col transition-all duration-300 hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-xl)] group">
-                <div className="relative h-40 bg-[var(--color-bg-muted)] overflow-hidden">
+                <div className="relative h-40 md:h-48 bg-[var(--color-bg-muted)] overflow-hidden rounded-t-xl">
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-alt)] opacity-10 flex items-center justify-center">
-                      {categoryIcons[project.category] || (
+                    <div className="w-24 h-24 rounded-2xl bg-[var(--color-bg-card)] border border-[var(--color-border)] flex items-center justify-center group-hover:border-[var(--color-accent)] group-hover:shadow-[var(--shadow-lg)] transition-all duration-300">
+                      {categoryIcons[project.category] ? (
+                        <span
+                          style={{
+                            color: categoryColors[project.category],
+                            fontSize: "32px",
+                          }}
+                          className="inline-flex"
+                        >
+                          {categoryIcons[project.category]}
+                        </span>
+                      ) : (
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-accent)]" aria-hidden="true">
                           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         </svg>
                       )}
                     </div>
                   </div>
-                  <div className="absolute top-4 right-4 flex gap-2">
-                    <span className={cn("px-2.5 py-1 rounded-full text-xs font-medium border", statusStyles[project.status as ProjectStatus])}>
+                  <div className="absolute top-4 right-4 flex flex-col gap-2">
+                    <span className={cn("px-3 py-1 rounded-full text-xs font-medium border", statusStyles[project.status as ProjectStatus])}>
                       {statusLabels[project.status as ProjectStatus]}
                     </span>
                     {project.featured && (
-                      <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-[var(--color-accent-alt)]/10 text-[var(--color-accent-alt)] border border-[var(--color-accent-alt)]/20">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-[var(--color-accent-alt)]/10 text-[var(--color-accent-alt)] border border-[var(--color-accent-alt)]/20">
                         Mis en avant
                       </span>
                     )}
@@ -105,12 +121,17 @@ export function Projects() {
 
                 <CardHeader className="px-6 pt-6 pb-0">
                   <div className="flex items-center gap-2 text-sm text-[var(--color-fg-muted)] mb-2">
-                    {categoryIcons[project.category]}
+                    <span
+                      style={{ color: categoryColors[project.category] }}
+                      className="inline-flex"
+                    >
+                      {categoryIcons[project.category]}
+                    </span>
                     <span>{project.category}</span>
                     <span aria-hidden="true">·</span>
                     <time dateTime={project.year.toString()}>{project.year}</time>
                   </div>
-                  <CardTitle className="text-2xl group-hover:text-[var(--color-accent)] transition-colors">{project.name}</CardTitle>
+                  <CardTitle className="text-2xl group-hover:text-[var(--color-accent)] transition-colors duration-300">{project.name}</CardTitle>
                 </CardHeader>
 
                 <CardContent className="px-6 pb-0 flex-1">
@@ -158,11 +179,11 @@ export function Projects() {
                   </div>
                 </CardFooter>
               </Card>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-16 md:mt-20 text-center animate-in animate-in-delay-5">
           <p className="text-[var(--color-fg-muted)] mb-6 max-w-2xl mx-auto text-balance">
             Tu as un projet qui pourrait nous intéresser ? On est toujours curieux de voir
             ce que la communauté construit.

@@ -12,7 +12,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", loading, disabled, children, as: Component = "button", ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", loading, disabled, children, asChild, as: Component = "button", ...props }, ref) => {
     const baseStyles = "inline-flex items-center justify-center font-medium transition-all duration-200 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
 
     const variants = {
@@ -20,7 +20,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       secondary: "bg-[var(--color-bg-muted)] text-[var(--color-fg)] hover:bg-[var(--color-border)] focus-visible:ring-[var(--color-border-strong)] border border-[var(--color-border)]",
       outline: "border-2 border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent-muted)] focus-visible:ring-[var(--color-accent)]",
       ghost: "text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] hover:bg-[var(--color-bg-muted)] focus-visible:ring-[var(--color-border-strong)]",
-      danger: "bg-[var(--color-error)] text-white hover:bg-[#c00] focus-visible:ring-[var(--color-error)]",
+      danger: "bg-[var(--color-error)] text-white hover:bg-[var(--color-error)]/90 focus-visible:ring-[var(--color-error)]",
     };
 
     const sizes = {
@@ -32,7 +32,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const isAnchor = Component === "a";
     const componentProps = isAnchor ? { ...props, href: (props as AnchorHTMLAttributes<HTMLAnchorElement>).href } : props;
 
-    // Use a generic ref type that works for both button and anchor
     const refType = ref as Ref<HTMLButtonElement | HTMLAnchorElement>;
 
     return (

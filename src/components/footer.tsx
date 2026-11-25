@@ -1,36 +1,36 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { LogoMark } from "@/components/ui/logo";
 import { siteConfig, projects, stats } from "@/content/site";
-import { useState, useEffect } from "react";
 
 export function Footer() {
   const [currentYear, setCurrentYear] = useState(2024);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- reading current year on mount is intentional
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- needed for dynamic year on client
     setCurrentYear(new Date().getFullYear());
   }, []);
 
   return (
-    <footer className="bg-[var(--color-bg-muted)] border-t border-[var(--color-border)]" role="contentinfo">
+    <footer className="relative bg-[var(--color-bg-muted)] border-t border-[var(--color-border)]" role="contentinfo">
       <div className="container py-16 md:py-24">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 md:mb-20">
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-6" aria-label="CARBONE - Accueil">
               <LogoMark size="md" />
               <span className="font-display font-bold text-xl text-[var(--color-fg)]">CARBONE</span>
             </Link>
-            <p className="text-[var(--color-fg-muted)] text-sm leading-relaxed max-w-xs">
+            <p className="text-[var(--color-fg-muted)] text-sm leading-relaxed max-w-xs mb-8">
               Collectif technologique ouvert. Nous développons nos propres projets et participons à des collaborations externes.
             </p>
-            <div className="mt-6 flex gap-4">
+            <div className="flex gap-4">
               <a
                 href={siteConfig.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors"
+                className="text-[var(--color-fg-muted)] hover:text-[var(--color-accent)] transition-colors"
                 aria-label="GitHub"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -39,7 +39,7 @@ export function Footer() {
               </a>
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors"
+                className="text-[var(--color-fg-muted)] hover:text-[var(--color-accent)] transition-colors"
                 aria-label="Email"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -53,10 +53,10 @@ export function Footer() {
           <nav aria-label="Navigation">
             <h3 className="font-display font-semibold text-[var(--color-fg)] mb-4">Navigation</h3>
             <ul className="space-y-3">
-              <li><Link href="#collectif" className="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors text-sm">Le collectif</Link></li>
-              <li><Link href="#projets" className="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors text-sm">Projets</Link></li>
-              <li><Link href="#collaborer" className="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors text-sm">Collaborer</Link></li>
-              <li><Link href="#contact" className="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] transition-colors text-sm">Contact</Link></li>
+              <li><Link href="#collectif" className="text-[var(--color-fg-muted)] hover:text-[var(--color-accent)] transition-colors text-sm">Le collectif</Link></li>
+              <li><Link href="#projets" className="text-[var(--color-fg-muted)] hover:text-[var(--color-accent)] transition-colors text-sm">Projets</Link></li>
+              <li><Link href="#collaborer" className="text-[var(--color-fg-muted)] hover:text-[var(--color-accent)] transition-colors text-sm">Collaborer</Link></li>
+              <li><Link href="#contact" className="text-[var(--color-fg-muted)] hover:text-[var(--color-accent)] transition-colors text-sm">Contact</Link></li>
             </ul>
           </nav>
 
@@ -85,10 +85,10 @@ export function Footer() {
 
           <div>
             <h3 className="font-display font-semibold text-[var(--color-fg)] mb-4">Stats rapides</h3>
-            <dl className="space-y-3 text-sm">
+            <dl className="space-y-4 text-sm">
               {stats.map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-1">
-                  <dt className="font-semibold text-[var(--color-fg)]">{stat.value}</dt>
+                  <dt className="font-bold text-[var(--color-fg)] text-lg">{stat.value}</dt>
                   <dd className="text-[var(--color-fg-muted)]">{stat.label}</dd>
                   <dd className="text-[var(--color-fg-subtle)] text-xs">{stat.note}</dd>
                 </div>

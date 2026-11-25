@@ -62,7 +62,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: dark)", color: "#080808" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -85,7 +85,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className="min-h-full flex flex-col bg-white text-[#0a0a0a] dark:bg-[#0a0a0a] dark:text-white">
+      <body className="min-h-full flex flex-col bg-[var(--color-bg)] text-[var(--color-fg)]">
         {children}
       </body>
     </html>
