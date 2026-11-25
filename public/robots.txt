@@ -1,0 +1,5 @@
+# CARBONE — Collectif technologique ouvert
+User-agent: *
+Allow: /
+
+Sitemap: https://carbone.group/sitemap.xml
